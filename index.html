@@ -13,9 +13,10 @@
         }
 
         body, html {
-            height: 100%;
+            min-height: 100%;
             background-color: #c3b1e1;
-            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         /* --- ЭКРАН ПАРОЛЯ --- */
@@ -83,8 +84,8 @@
             background-color: #e6e600;
             color: #009966;
             text-align: center;
-            padding: 20px 10px;
-            font-size: 70px;
+            padding: 25px 10px;
+            font-size: 75px;
             font-weight: bold;
             letter-spacing: 2px;
         }
@@ -93,35 +94,41 @@
             background-color: #8ce6f0;
             color: #009966;
             text-align: center;
-            padding: 12px 10px;
-            font-size: 28px;
-            border-bottom: 4px solid #ba55d3;
+            padding: 15px 10px;
+            font-size: 32px;
+            border-bottom: 5px solid #ba55d3;
         }
 
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px;
             color: #009966;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 500;
+            margin-top: auto; /* Прижимает футер к самому низу, когда контента мало */
         }
 
         /* --- ГЛАВНАЯ СТРАНИЦА --- */
         #main-page {
-            display: none; /* Изначально скрыто, включается после пароля */
+            display: none;
             flex-direction: column;
             min-height: 100vh;
         }
 
         .container {
-            max-width: 1000px;
-            margin: 50px auto;
-            padding: 0 20px;
-            flex-grow: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 40px auto;
+            padding: 0 30px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px 60px;
+            gap: 40px 60px; /* Сделал нормальные отступы между кнопками */
             align-content: start;
+        }
+
+        /* Чтобы седьмая кнопка "Как делать игры?" растянулась на всю ширину снизу */
+        .full-width-btn {
+            grid-column: 1 / span 2;
         }
 
         .btn-link {
@@ -129,14 +136,15 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            font-size: 26px;
+            font-size: 28px;
             color: #009966;
-            height: 60px;
-            border-radius: 30px;
+            height: 65px;
+            border-radius: 35px;
             font-weight: 500;
             transition: transform 0.1s, opacity 0.2s;
             cursor: pointer;
             border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
         .btn-link:hover {
@@ -149,7 +157,7 @@
 
         /* --- ВТОРАЯ СТРАНИЦА (КАК ДЕЛАТЬ ИГРЫ) --- */
         #games-page {
-            display: none; /* Изначально скрыто */
+            display: none;
             flex-direction: column;
             min-height: 100vh;
         }
@@ -158,23 +166,24 @@
             max-width: 1200px;
             width: 100%;
             margin: 40px auto;
-            padding: 0 20px;
-            flex-grow: 1;
+            padding: 0 30px;
             display: flex;
-            gap: 40px;
+            gap: 50px;
+            flex-grow: 1;
         }
 
         .video-block {
-            flex: 1;
-            min-width: 300px;
+            flex: 1.2;
+            min-width: 450px;
             aspect-ratio: 16 / 9;
             border: 3px solid #009966;
             background-color: #b5a2d4;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 4px;
+            border-radius: 6px;
             overflow: hidden;
+            height: fit-content;
         }
 
         .video-block video {
@@ -186,8 +195,8 @@
         .text-block {
             flex: 1;
             color: #009966;
-            font-size: 24px;
-            line-height: 1.5;
+            font-size: 26px;
+            line-height: 1.6;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -195,29 +204,32 @@
 
         .text-end {
             text-align: right;
-            margin-top: 20px;
+            margin-top: 30px;
+            font-weight: 500;
         }
 
         .back-btn {
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             background-color: #e6e600;
             color: #009966;
-            padding: 10px 20px;
-            border-radius: 20px;
+            padding: 12px 25px;
+            border-radius: 25px;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 20px;
             cursor: pointer;
             border: none;
         }
 
         @media (max-width: 768px) {
             .container { grid-template-columns: 1fr; gap: 20px; }
-            .content-container { flex-direction: column; }
+            .full-width-btn { grid-column: auto; }
+            .content-container { flex-direction: column; gap: 30px; }
+            .video-block { min-width: 100%; }
             .top-banner { font-size: 45px; }
-            .sub-banner { font-size: 20px; }
-            .btn-link { font-size: 20px; height: 50px; }
-            .text-block { font-size: 18px; }
+            .sub-banner { font-size: 22px; }
+            .btn-link { font-size: 22px; height: 55px; }
+            .text-block { font-size: 20px; }
         }
     </style>
 </head>
@@ -246,9 +258,10 @@
             <a href="https://cosmoboyn.github.io/geometry-dash-parody/" class="btn-link btn-yellow">Geometry Dash</a>
             <a href="https://cosmoboyn.github.io/space-game/" class="btn-link btn-blue">Неудачная игра</a>
 
-            <button onclick="showPage('games-page')" class="btn-link btn-yellow">Как делать игры?</button>
-            
+            <a href="https://cosmoboyn.github.io/gemeni-ai-os/" class="btn-link btn-yellow">Gemeni OS</a>
             <a href="https://cosmoboyn.github.io/bs-chess/" class="btn-link btn-blue">Chess</a>
+
+            <button onclick="showPage('games-page')" class="btn-link btn-yellow full-width-btn">Как делать игры?</button>
         </main>
 
         <footer>
@@ -273,11 +286,11 @@
                 <div>
                     <button onclick="showPage('main-page')" class="back-btn">← Назад</button>
                     
-                    <p> Первым создадите аккаунт затем репозиторий, он слева зелёная кнопка. Там вы должны увидеть снизу кнопку Создать файл или Create file. Просите у ии код на игру. Вставляете и называете файл index.html и сохраняйте. Затем в кладке настройки или Settings зайдите на вкладку страницы или Pages и выбираете в одной из окошек выбор на Основной или Main и сохраняйте. Через несколько минут перезагрузите страницу и у вас появиться ссылка на игру. Скидывайте их сюда</p>
+                    <p>Первым создадите аккаунт затем репозиторий, он слева зелёная кнопка. Там вы должны увидеть снизу кнопку Создать файл или Create file. Просите у ии код на игру. Вставляете и называете файл index.html и сохраняйте. Затем в кладке настройки или Settings зайдите на вкладку страницы или Pages и выбираете в одной из окошек выбор на Основной или Main и сохраняйте. Через несколько минут перезагрузите страницу и у вас появиться ссылка на игру. </p>
                 </div>
 
                 <div class="text-end">
-                   .
+                    .
                 </div>
             </div>
 
@@ -299,7 +312,7 @@
                 passwordScreen.style.opacity = '0';
                 setTimeout(() => {
                     passwordScreen.style.display = 'none';
-                    showPage('main-page'); // После пароля открываем главную
+                    showPage('main-page');
                 }, 500);
             } else {
                 errorMsg.style.display = 'block';
@@ -307,13 +320,12 @@
             }
         }
 
-        // Функция плавной смены экранов
         function showPage(pageId) {
             document.getElementById('main-page').style.display = 'none';
             document.getElementById('games-page').style.display = 'none';
             
             document.getElementById(pageId).style.display = 'flex';
-            window.scrollTo(0, 0); // Прокрутка вверх при смене экрана
+            window.scrollTo(0, 0);
         }
     </script>
 
